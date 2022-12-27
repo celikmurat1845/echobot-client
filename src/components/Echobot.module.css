@@ -1,0 +1,125 @@
+.container {
+    border: 1px rgb(28, 94, 226) solid;
+    width: 30%;
+    height: 55rem;
+    border-radius: 1.5rem;
+    margin:2rem auto;
+}
+
+.header {
+    height: 7%;
+    background-color: rgb(28, 94, 226);
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.headerContent{
+    color: #fff;
+}
+
+.content {
+    height: 78%;
+}
+
+.textArea {
+    height: 15%;
+    margin-bottom: 0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 99%;
+    width: 100%;
+}
+
+.input {
+    height: 90%;
+    width: 95%;
+    padding-left: 1rem;
+    /* border-bottom-left-radius: 1.5rem; */
+    /* border-bottom-right-radius: 1.5rem; */
+    border: 1px none none;
+    border-color: rgb(203, 199, 199);
+    border-bottom: #fff;
+    border-left: #fff;
+    border-right: #fff;
+    margin-bottom: 1rem;
+}
+
+.button {
+    background-color: rgb(246, 182, 6);
+    color: rgb(28, 94, 226);
+    padding: .6rem;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 1rem;
+}
+
+.outGoingMessage{
+    display: flex;
+    border: 1px solid rgb(239, 236, 236);
+    border-radius: 1rem;
+    width: 40%;
+    height: fit-content;
+    background-color: rgb(239, 236, 236);
+    padding: 1rem;
+    margin: 1rem
+}
+
+.inComingMessage {
+    display: flex;
+    border: 1px solid rgb(239, 236, 236);
+    border-radius: 1rem;
+    width: 40%;
+    height: fit-content;
+    background-color: rgb(28, 94, 226);
+    color: #fff;
+    padding: 1rem;
+    float: right;
+    margin: 0 1rem
+}
+
+@media screen and (max-width: 1350px) {
+    .container {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .container {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .container {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .container {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .container {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 465px) {
+    .container {
+        width: 100%;
+    }
+}
+
+
