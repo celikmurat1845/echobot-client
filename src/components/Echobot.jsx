@@ -7,39 +7,31 @@ import ChatService from '../services/ChatService';
 export default function Echobot() {
     const channel = useRef(createChannel());
     const apiRequest = channel.current.request;
-    const apiController = channel.current.controller;
     const chatService = new ChatService(apiRequest);
 
-    // declare initial state's
-    const [outGoingMessage, setOutGoingMessage] = useState([]);
-    const [inComingMessage, setInComingMessage] = useState([]);
-    const [lastMessage, setLastMessage] = useState([]);
+    // declare initial state and ref
+    const [allMessages, setAllMessages] = useState([]);
+    const inputRef = useRef();
 
-    console.log("oooo", outGoingMessage)
-    const handleInputChange = (e) => {
-        e.preventDefault();
-        // const value = e.target.value
-        setOutGoingMessage([e.target.value])
-        // setLastMessage([...lastMessage, outGoingMessage])
-    }
     // send message to API
     const sendCustomerMessage = (e) => {
         e.preventDefault();
-        console.log("message------>>", outGoingMessage[outGoingMessage.length - 1])
+        // setAllMessages([...allMessages, { from: "customer", msg: inputRef.current.value }])
+
         const payload = {
-            textMessage: outGoingMessage
-        }
-        console.log("PAYLOAD ------->>", payload);
+            textMessage: inputRef.current.value
+        };
+
         chatService
             .sendCustomerMessage(payload)
             .then((res) => {
-                console.log("RESPONSE------>>", res.data.data)
-                setInComingMessage([...inComingMessage, res.data.data])
+                setAllMessages([...allMessages, { from: "customer", msg: inputRef.current.value }, { from: "server", msg: res.data.data }])
+                inputRef.current.value = '';
             })
             .catch((err) => {
                 console.log("ERROR 💥", err)
             })
-    }
+    };
 
     return (
         <div className={styles.container}>
@@ -47,14 +39,16 @@ export default function Echobot() {
                 <h2 className={styles.headerContent}>Canlı Destek</h2>
             </div>
             <div className={styles.content}>
-                <div className={outGoingMessage.length && styles.outGoingMessage}>{outGoingMessage}</div>
-                <div className={inComingMessage.length && styles.inComingMessage}>{inComingMessage}</div>
+                {allMessages.length > 0 && allMessages?.map((message, index) => {
+                    return (
+                        <div key={index} className={message.from === "customer" ? styles.outGoingMessage : styles.inComingMessage}><p>{message.msg}</p></div>
+                    )
+                })}
             </div>
             <div className={styles.textArea}>
                 <form className={styles.form} onSubmit={sendCustomerMessage}>
-                    {/* <label></label> */}
-                    <input id='textArea' className={styles.input} placeholder="Mesajınızı yazınız..." onChange={handleInputChange}></input>
-                    <button className={styles.button} onClick={sendCustomerMessage}>Gönder</button>
+                    <input ref={inputRef} id='textArea' className={styles.input} placeholder="Mesajınızı yazınız..."></input>
+                    <button className={styles.button} type='submit'>Gönder</button>
                 </form>
             </div>
         </div>
