@@ -41,9 +41,12 @@ export default function Echobot() {
             <div className={styles.content}>
                 {allMessages.length > 0 && allMessages?.map((message, index) => {
                     return (
-                        <div key={index} className={message.from === "customer" ? styles.outGoingMessage : styles.inComingMessage}><p>{message.msg}</p></div>
+                        <div key={index} className={message.from === "customer" ? styles.outGoingMessage : styles.inComingMessage}>
+                            <p>{message.msg}</p>
+                        </div>
                     )
                 })}
+
             </div>
             <div className={styles.textArea}>
                 <form className={styles.form} onSubmit={sendCustomerMessage}>
